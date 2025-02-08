@@ -27,10 +27,11 @@ export default {
 
     // return projects filtered by given projectID
     else {
-      let projectTasks = [];
-      for (const task of taskList) {
-        if (task.project === projectID) projectTasks.push(task);
-      }
+      // let projectTasks = [];
+      // for (const task of taskList) {
+      //   if (task.project === projectID) projectTasks.push(task);
+      // }
+      let projectTasks = taskList.filter((task) => task.project === projectID);
       return projectTasks;
     }
   },
