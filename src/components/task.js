@@ -7,5 +7,6 @@ export default class Task {
     this.priority = priority;
     this.isDone = false;
     this.project = projectID;
+    this.dateCreated = new Date(Date.now());
   }
 }
