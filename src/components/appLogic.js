@@ -1,22 +1,22 @@
 import Project from "./project.js";
 import Task from "./task.js";
-import { v4 as uuidv4 } from 'uuid'; 
+import Storage from "./storage.js";
 
 // TEMPORARY STORAGE ARRAY
-let taskList = [];
-let projectList = [];
+let taskList = Storage.loadTasks();
+let projectList = Storage.loadProjects();
 
 export default {
-  addTask(title, description, dueDate, priority, projectID) {
+  createTask(title, description, dueDate, priority, projectID) {
     const myTask = new Task(title, description, dueDate, priority, projectID);
     taskList.push(myTask);
-  
+    Storage.saveTasks(taskList);
   },
   
   createProject(title) {
     const myProj = new Project(title);
     projectList.push(myProj);
-    // Storage.saveProjects(projectList);
+    Storage.saveProjects(projectList);
     return myProj.id;
   },
   
