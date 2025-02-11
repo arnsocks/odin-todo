@@ -2,7 +2,6 @@ import Project from "./project.js";
 import Task from "./task.js";
 import Storage from "./storage.js";
 
-// TEMPORARY STORAGE ARRAY
 let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();
 
@@ -11,6 +10,7 @@ export default {
     const myTask = new Task(title, description, dueDate, priority, projectID);
     taskList.push(myTask);
     Storage.saveTasks(taskList);
+    return myTask.id;
   },
   
   createProject(title) {
@@ -36,15 +36,20 @@ export default {
   },
   
   deleteTask(taskID) {
-    // TO DO find the task that matches the ID and remove it from the storage
-    // 
+    taskList = taskList.filter((task) => task.id !== taskID);
+    Storage.saveTasks(taskList);
   },
   
   deleteProject(projectID) {
-    // TO DO delete the project that matches the ID and remove it from storage
-    // TO DO delete all tasks that are assigned to that project.
-    // 
+    // TO DO delete all the tasks associated with the project
+    taskList = taskList.filter((task) => task.project !== projectID);
+    Storage.saveTasks(taskList);
+
+    // TO DO delete the project
+    projectList = projectList.filter((project) => project.id !== projectID);
+    Storage.saveProjects(projectList);
   }
+
 };
 
 
