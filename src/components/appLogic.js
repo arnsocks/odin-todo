@@ -1,5 +1,5 @@
-import Project from "./project";
-import Task from "./task";
+import Project from "./project.js";
+import Task from "./task.js";
 import { v4 as uuidv4 } from 'uuid'; 
 
 // TEMPORARY STORAGE ARRAY
@@ -8,17 +8,16 @@ let projectList = [];
 
 export default {
   addTask(title, description, dueDate, priority, projectID) {
-    const taskId = `${uuidv4()}`; // Generate a unique task ID number
-    const myTask = new Task(taskId, title, description, dueDate, priority, projectID);
+    const myTask = new Task(title, description, dueDate, priority, projectID);
     taskList.push(myTask);
   
   },
   
   createProject(title) {
-    const projId = `${uuidv4()}`; // Generate a unique project ID number
-    const myProj = new Project(projId, title);
+    const myProj = new Project(title);
     projectList.push(myProj);
-    return projId;
+    // Storage.saveProjects(projectList);
+    return myProj.id;
   },
   
   listTasks(projectID) {
@@ -27,10 +26,6 @@ export default {
 
     // return projects filtered by given projectID
     else {
-      // let projectTasks = [];
-      // for (const task of taskList) {
-      //   if (task.project === projectID) projectTasks.push(task);
-      // }
       let projectTasks = taskList.filter((task) => task.project === projectID);
       return projectTasks;
     }
