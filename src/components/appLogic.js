@@ -41,11 +41,11 @@ export default {
   },
   
   deleteProject(projectID) {
-    // TO DO delete all the tasks associated with the project
+    // Delete all the tasks associated with the project
     taskList = taskList.filter((task) => task.project !== projectID);
     Storage.saveTasks(taskList);
 
-    // TO DO delete the project
+    // Delete the project
     projectList = projectList.filter((project) => project.id !== projectID);
     Storage.saveProjects(projectList);
   }
