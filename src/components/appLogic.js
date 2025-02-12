@@ -6,8 +6,8 @@ let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();
 
 export default {
-  createTask(title, description, dueDate, priority, projectID) {
-    const myTask = new Task(title, description, dueDate, priority, projectID);
+  createTask(title, description, dueDate, priority, projectID, taskID) {
+    const myTask = new Task(title, description, dueDate, priority, projectID, taskID);
     taskList.push(myTask);
     Storage.saveTasks(taskList);
     return myTask.id;
@@ -48,6 +48,11 @@ export default {
     // Delete the project
     projectList = projectList.filter((project) => project.id !== projectID);
     Storage.saveProjects(projectList);
+  },
+
+  editTask(taskID, title, description, dueDate, priority, projectID) {
+    this.deleteTask(taskID);
+    this.createTask(title, description, dueDate, priority, projectID, taskID);
   }
 
 };
