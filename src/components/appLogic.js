@@ -50,7 +50,7 @@ export default {
     Storage.saveProjects(projectList);
   },
 
-  editTask(taskID, title, description, dueDate, priority, projectID) {
+  editTask(taskID, title, description, dueDate, priority, isDone, projectID) {
     // Copy the task and update its fields
     let myTask = taskList.find((task) => task.id === taskID);
     myTask.title = title;
@@ -58,13 +58,14 @@ export default {
     myTask.dueDate = dueDate;
     myTask.priority = priority;
     myTask.project = projectID;
+    myTask.isDone = isDone;
 
     // Remove the original task
     this.deleteTask(taskID);
 
     // Put the new task into storage
     taskList.push(myTask);
-    Storage.saveTasks;
+    Storage.saveTasks(taskList);
   }
 
 };
