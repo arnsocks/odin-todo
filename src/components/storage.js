@@ -24,8 +24,8 @@ export default {
   },
 
   deleteAll() {
-    localStorage.setItem("taskList", JSON.stringify([]));
-    localStorage.setItem("projectList", JSON.stringify([]));
+    localStorage.setItem("taskList", "[]");
+    localStorage.setItem("projectList", "[]");
   }
 }
 

@@ -2,8 +2,6 @@
 import App from './appLogic';
 import CardLayout from './layouts/cardLayout';
 
-
-
 export default class DOMcontroller {
   constructor() {
     console.log('Activating the DOM controller');
