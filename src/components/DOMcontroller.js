@@ -2,43 +2,36 @@
 import App from './appLogic';
 import CardLayout from './layouts/cardLayout';
 
-export default class DOMcontroller {
-  constructor() {
-    console.log('Activating the DOM controller');
-    this.contentDiv = document.querySelector("#content");
-    this.contentDiv.textContent = "This is a test of DOMcontroller";
-  }
+console.log("Activating the DOM controller");
+const contentDiv = document.querySelector("#content");
+contentDiv.textContent = "This is a test of DOMcontroller";
 
-  initEventListeners() {
-    const newTaskDialog = document.querySelector("#new-task-dialog");
-    const newTaskBtn = document.querySelector("#new-task");
-    newTaskBtn.addEventListener("click", () => {
-      newTaskDialog.showModal();
-    });
-    
-    const confirmTaskBtn = document.querySelector("#task-confirm");
-    confirmTaskBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      newTaskDialog.close();
-    });
-  }
 
-  loadComponent(component) {
-    this.contentDiv.textContent = '';
-    this.contentDiv.appendChild(component);
-  }
+export function initEventListeners() {
+  const newTaskDialog = document.querySelector("#new-task-dialog");
+  const newTaskBtn = document.querySelector("#new-task");
+  newTaskBtn.addEventListener("click", () => {
+    newTaskDialog.showModal();
+  });
 
-  loadProjectBar() {
-    console.log("Loading projects");
-    let projectBar = document.querySelector("#project-bar");
-    projectBar.classList.add("blue");
-    const projectList = App.listProjects();
-    for (const project of projectList) {
+  const confirmTaskBtn = document.querySelector("#task-confirm");
+  confirmTaskBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    newTaskDialog.close();
+  });
+}
 
-      let myProject = document.createElement("div");
-      myProject.textContent = `${project.title}`;
-      projectBar.appendChild(myProject);
-    }
+export function loadProjectBar() {
+  let projectBar = document.querySelector("#project-bar");
+  // const projectList = App.listProjects();
+  for (const project of App.listProjects()) {
+    let myProject = document.createElement("div");
+    myProject.textContent = `${project.title}`;
+    projectBar.appendChild(myProject);
   }
 }
 
+export function loadComponent(component) {
+  contentDiv.textContent = '';
+  contentDiv.appendChild(component);
+}

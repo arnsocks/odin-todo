@@ -1,10 +1,10 @@
 import "./styles.css";
 import App from './components/appLogic.js';
 import Storage from './components/storage.js';
-import DOMcontroller from './components/DOMcontroller.js';
+import * as DOM from './components/DOMcontroller.js';
 import CardLayout from './components/layouts/cardLayout.js';
 
-const DOM = new DOMcontroller;
+// const DOM = new DOMcontroller;
 // window.DOM = new DOMcontroller;
 
 Storage.deleteAll();
