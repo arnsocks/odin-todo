@@ -1,10 +1,6 @@
-// TEMPORARY STORAGE ARRAY - to be replaced with LocalStorage
-// let taskList = [];
-// let projectList = [];
-
 // Initialize localStorage arrays if needed
 if (!localStorage.taskList) localStorage.setItem("taskList", JSON.stringify([]));
-if (!localStorage.projectList) localStorage.setItem("taskList", JSON.stringify([]));
+if (!localStorage.projectList) localStorage.setItem("projectList", JSON.stringify([]));
 
 export default {
   loadTasks() {
@@ -23,10 +19,10 @@ export default {
     localStorage.setItem("projectList", JSON.stringify(projects));
   },
 
-  deleteAll() {
-    localStorage.setItem("taskList", "[]");
-    localStorage.setItem("projectList", "[]");
-  }
+  // deleteAll() {
+  //   localStorage.setItem("taskList", "[]");
+  //   localStorage.setItem("projectList", "[]");
+  // }
 }
 
 

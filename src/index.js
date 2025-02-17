@@ -4,11 +4,12 @@ import Storage from './components/storage.js';
 import * as DOM from './components/DOMcontroller.js';
 import CardLayout from './components/layouts/cardLayout.js';
 
+// Storage.deleteAll();
 loadTempTasks();
 DOM.loadComponent(CardLayout(App.listTasks()));
 DOM.loadProjectBar();
 DOM.initEventListeners();
-console.log(App.listProjects());
+// console.log(App.listProjects());
 
 
 
@@ -30,7 +31,11 @@ console.log(App.listProjects());
 // // Storage.deleteAll();
 
 function loadTempTasks() {
-  if (Storage.loadTasks() == []) {
+  console.log("Loading temp tasks. Current");
+  let currentTaskList = App.listTasks();
+  console.log(currentTaskList);
+
+  if (currentTaskList.length === 0) {
     let projID = App.createProject("Default");
     App.createTask("test task", "This is a test", new Date(Date.now()), "high", projID);
     let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);

@@ -2,8 +2,6 @@ import Project from "./project.js";
 import Task from "./task.js";
 import Storage from "./storage.js";
 
-// Storage.deleteAll();
-
 let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();
 
@@ -67,6 +65,13 @@ export default {
 
     // Put the new task into storage
     taskList.push(myTask);
+    Storage.saveTasks(taskList);
+  },
+
+  deleteAll() {
+    taskList = [];
+    projectList = [];
+    Storage.saveProjects(projectList);
     Storage.saveTasks(taskList);
   }
 
