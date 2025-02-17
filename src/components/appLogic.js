@@ -2,7 +2,7 @@ import Project from "./project.js";
 import Task from "./task.js";
 import Storage from "./storage.js";
 
-Storage.deleteAll();
+// Storage.deleteAll();
 
 let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();

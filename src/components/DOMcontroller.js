@@ -1,4 +1,3 @@
-// console.log('This is a wobbery');
 import App from './appLogic';
 import CardLayout from './layouts/cardLayout';
 
@@ -7,18 +6,17 @@ const contentDiv = document.querySelector("#content");
 contentDiv.textContent = "This is a test of DOMcontroller";
 
 
-export function initEventListeners() {
-  const newTaskDialog = document.querySelector("#new-task-dialog");
-  const newTaskBtn = document.querySelector("#new-task");
+const newTaskDialog = document.querySelector("#new-task-dialog");
+const newTaskBtn = document.querySelector("#new-task");
+const confirmTaskBtn = document.querySelector("#task-confirm");
+const cancelTaskBtn = document.querySelector("#task-cancel");
+
+export function initEventListeners() {  
   newTaskBtn.addEventListener("click", () => {
     newTaskDialog.showModal();
   });
-
-  const confirmTaskBtn = document.querySelector("#task-confirm");
-  confirmTaskBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    newTaskDialog.close();
-  });
+  confirmTaskBtn.addEventListener("click", confirmBtnClick);
+  cancelTaskBtn.addEventListener("click", () => newTaskDialog.close());
 }
 
 export function loadProjectBar() {
@@ -34,4 +32,22 @@ export function loadProjectBar() {
 export function loadComponent(component) {
   contentDiv.textContent = '';
   contentDiv.appendChild(component);
+}
+
+// *** Event Handler Functions ***
+
+function confirmBtnClick(e) {
+  e.preventDefault();
+  newTaskDialog.close();
+
+  const taskTitle = document.querySelector("#task-title");
+  const taskDescription = document.querySelector("#task-description");
+  const dueDate = document.querySelector("#due-date");
+
+  App.createTask(taskTitle.value, taskDescription.value, dueDate.value);
+  loadComponent(CardLayout(App.listTasks()));
+
+  taskTitle.value = '';
+  taskDescription.value = '';
+  dueDate.value = new Date(Date.now);
 }

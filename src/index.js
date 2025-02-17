@@ -4,10 +4,6 @@ import Storage from './components/storage.js';
 import * as DOM from './components/DOMcontroller.js';
 import CardLayout from './components/layouts/cardLayout.js';
 
-// const DOM = new DOMcontroller;
-// window.DOM = new DOMcontroller;
-
-Storage.deleteAll();
 loadTempTasks();
 DOM.loadComponent(CardLayout(App.listTasks()));
 DOM.loadProjectBar();
@@ -34,11 +30,14 @@ console.log(App.listProjects());
 // // Storage.deleteAll();
 
 function loadTempTasks() {
-  let projID = App.createProject("Default");
-  App.createTask("test task", "This is a test", new Date(Date.now()), "high", projID);
-  let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);
-  let taskToEdit = App.createTask("Edit this task", "A task to test editing", new Date(Date.now()), "medium", projID);
-  App.createTask("New Project Task", "This task in not in the default project", new Date(Date.now()), "low", "8675309");
+  if (Storage.loadTasks() == []) {
+    let projID = App.createProject("Default");
+    App.createTask("test task", "This is a test", new Date(Date.now()), "high", projID);
+    let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);
+    let taskToEdit = App.createTask("Edit this task", "A task to test editing", new Date(Date.now()), "medium", projID);
+    App.createTask("New Project Task", "This task in not in the default project", new Date(Date.now()), "low", "8675309");
+  }
+  
 }
 
 // DOM.loadComponent(CardLayout(App.listTasks()));
