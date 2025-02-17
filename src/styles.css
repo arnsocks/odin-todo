@@ -39,3 +39,39 @@ h1, h2, h3, h4, h5, h6 {
 #root, #__next {
   isolation: isolate;
 }
+
+/* ^^ END OF RESET ^^ */
+
+#wrapper {
+  display: grid;
+  grid-template-columns: 40ch 1fr;
+}
+
+#project-bar h2 {
+  text-align: center;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  position: relative;
+}
+
+.task-card {
+  border: 1px solid rebeccapurple;
+  border-radius: 3px;
+  padding: 0.5rem;
+}
+
+
+/* DEV - DEBUGGING */
+div {
+  border: 1px solid red;
+}
+
+.blue {
+  background-color: aqua;
+}

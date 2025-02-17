@@ -13,8 +13,18 @@ export default class DOMcontroller {
     this.contentDiv.textContent = '';
     this.contentDiv.appendChild(component);
   }
-  
-  // this.loadComponent(CardLayout(App.listTasks()));
 
+  loadProjectBar() {
+    console.log("Loading projects");
+    let projectBar = document.querySelector("#project-bar");
+    projectBar.classList.add("blue");
+    const projectList = App.listProjects();
+    for (const project of projectList) {
+
+      let myProject = document.createElement("div");
+      myProject.textContent = `${project.title}`;
+      projectBar.appendChild(myProject);
+    }
+  }
 }
 

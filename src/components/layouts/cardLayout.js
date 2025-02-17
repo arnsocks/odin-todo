@@ -1,6 +1,6 @@
 export default function TaskCards(taskList) {
   const cardContainer = document.createElement('div');
-  cardContainer.id = 'card-container';
+  cardContainer.classList.add('card-container');
 
   for (const task of taskList) {
     const taskCard = document.createElement('div');
@@ -10,7 +10,7 @@ export default function TaskCards(taskList) {
     const myTitle = document.createElement('h2');
     myTitle.textContent = task.title;
     const myDueDate = document.createElement('p');
-    myDueDate.textContent = task.dueDate;
+    myDueDate.textContent = `Due: ${task.dueDate}`;
 
     taskCard.appendChild(myTitle);
     taskCard.appendChild(myDueDate);

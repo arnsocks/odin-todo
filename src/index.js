@@ -4,17 +4,14 @@ import Storage from './components/storage.js';
 import DOMcontroller from './components/DOMcontroller.js';
 import CardLayout from './components/layouts/cardLayout.js';
 
-const body = document.querySelector('body');
-const heading = document.createElement('h1');
-heading.textContent = "This is a test of the emergency alert system";
-body.appendChild(heading);
-
 const DOM = new DOMcontroller;
 // window.DOM = new DOMcontroller;
 
 Storage.deleteAll();
 loadTempTasks();
 DOM.loadComponent(CardLayout(App.listTasks()));
+DOM.loadProjectBar();
+console.log(App.listProjects());
 
 
 
