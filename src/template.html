@@ -10,8 +10,11 @@
   <div id="wrapper">
     <div id="sidebar">
       <div id="menu">
-        <h1>Doing It!</h1>
-        <p>A web task manager</p>
+        <div class="logo">
+          <h1>Doing It!</h1>
+          <p>A web task manager</p>  
+        </div>
+        <button id="new-task" type="button">New Task</button>
       </div>
       <div id="project-bar">
         <h2>Projects</h2>
@@ -21,6 +24,30 @@
     
     </div>
   </div>
+
+  <dialog id="new-task-dialog">
+    <form>
+      <h3>Create New Task</h3>
+      <ul>
+        <li>
+          <label for="task-title">Title:</label>
+          <input type="text" name:="title" id="task-title">
+        </li>
+        <li>
+          <label for="task-description">Description:</label>
+          <textarea id="task-description" name="task-description" rows="1">
+            Task description...
+          </textarea>
+        </li>
+        <li>
+          <label for="due-date">Due date:</label>
+          <input type="datetime-local" id="due-date" name="due-date" />
+        </li>
+      </ul>
+      <button id="task-confirm" type="button">Confirm</button>
+      <button id="task-cancel" type="button">Cancel</button>
+    </form>
+  </dialog>
   
   
 </body>

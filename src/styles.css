@@ -75,3 +75,7 @@ div {
 .blue {
   background-color: aqua;
 }
+
+#new-task {
+  background-color: red;
+}

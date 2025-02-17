@@ -11,6 +11,7 @@ Storage.deleteAll();
 loadTempTasks();
 DOM.loadComponent(CardLayout(App.listTasks()));
 DOM.loadProjectBar();
+DOM.initEventListeners();
 console.log(App.listProjects());
 
 

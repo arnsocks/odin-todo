@@ -9,6 +9,20 @@ export default class DOMcontroller {
     this.contentDiv.textContent = "This is a test of DOMcontroller";
   }
 
+  initEventListeners() {
+    const newTaskDialog = document.querySelector("#new-task-dialog");
+    const newTaskBtn = document.querySelector("#new-task");
+    newTaskBtn.addEventListener("click", () => {
+      newTaskDialog.showModal();
+    });
+    
+    const confirmTaskBtn = document.querySelector("#task-confirm");
+    confirmTaskBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      newTaskDialog.close();
+    });
+  }
+
   loadComponent(component) {
     this.contentDiv.textContent = '';
     this.contentDiv.appendChild(component);
