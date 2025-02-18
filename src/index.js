@@ -3,6 +3,7 @@ import App from './components/appLogic.js';
 import Storage from './components/storage.js';
 import * as DOM from './components/DOMcontroller.js';
 import CardLayout from './components/layouts/cardLayout.js';
+import Project from "./components/project.js";
 
 // Storage.deleteAll();
 loadTempTasks();
@@ -10,6 +11,7 @@ DOM.loadComponent(CardLayout(App.listTasks()));
 DOM.loadProjectBar();
 DOM.initEventListeners();
 // console.log(App.listProjects());
+// App.getProjectByID("b44bd646-b44c-4136-9360-5394cfb389e0");
 
 
 
@@ -31,17 +33,16 @@ DOM.initEventListeners();
 // // Storage.deleteAll();
 
 function loadTempTasks() {
-  console.log("Loading temp tasks. Current");
   let currentTaskList = App.listTasks();
-  console.log(currentTaskList);
-
   if (currentTaskList.length === 0) {
     let projID = App.createProject("Default");
     App.createTask("test task", "This is a test", new Date(Date.now()), "high", projID);
     let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);
     let taskToEdit = App.createTask("Edit this task", "A task to test editing", new Date(Date.now()), "medium", projID);
     App.createTask("New Project Task", "This task in not in the default project", new Date(Date.now()), "low", "8675309");
+    console.log(App.getProjectByID(projID));
   }
+  
   
 }
 

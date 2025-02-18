@@ -68,6 +68,13 @@ export default {
     Storage.saveTasks(taskList);
   },
 
+  getProjectByID(projID) {
+    console.log(`Searching for project with ID: ${projID}`);
+    const myProject = projectList.find((project) => project.id == projID);
+    if (myProject) console.log(`Found project with title: ${myProject.title}`);
+    return myProject;
+  },
+
   deleteAll() {
     taskList = [];
     projectList = [];
