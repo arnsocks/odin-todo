@@ -36,6 +36,11 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
+ul, ol, li {
+  list-style: none;
+  padding: 0;
+}
+
 #root, #__next {
   isolation: isolate;
 }
@@ -64,6 +69,10 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid rebeccapurple;
   border-radius: 3px;
   padding: 0.5rem;
+}
+
+.task-info-heading {
+  font-weight: bold;
 }
 
 
