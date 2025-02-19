@@ -27,14 +27,14 @@ export function loadProjectBar() {
     let myProject = document.createElement("div");
     myProject.textContent = `${project.title}`;
     projectBar.appendChild(myProject);
-    
+
+    // This bit updates the list of projects in the select dropdown and should
+    // probably live in a page refresh method in the future
     let myProjectOption = document.createElement("option");
     myProjectOption.value = `${project.id}`;
     myProjectOption.textContent = `${project.title}`;
     projectSelect.appendChild(myProjectOption);
   }
-  
-
 }
 
 export function loadComponent(component) {
@@ -52,8 +52,9 @@ function confirmBtnClick(e) {
   const taskDescription = document.querySelector("#task-description");
   const dueDate = document.querySelector("#due-date");
   const priority = document.querySelector("#priority");
+  const project = document.querySelector("#project-select");
 
-  App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value);
+  App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
   loadComponent(CardLayout(App.listTasks()));
 
   taskTitle.value = '';

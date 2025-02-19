@@ -13,10 +13,18 @@ export default function TaskCards(taskList) {
     const taskInfoList = document.createElement('ul');
     taskInfoList.classList.add('task-info-list');
 
+    // Create the checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.name = 'task-checkbox';
+    checkbox.id = "#task-checkbox";
+    checkbox.classList.add('task-checkbox');
+
     // Create Task Card Heading
     const titleItem = document.createElement('li');
     const myTitle = document.createElement('h2');
     myTitle.textContent = task.title;
+    titleItem.appendChild(checkbox);
     titleItem.appendChild(myTitle);
 
     //Create Due Date
