@@ -43,6 +43,21 @@
           <label for="due-date">Due date:</label>
           <input type="datetime-local" id="due-date" name="due-date" />
         </li>
+        <li>
+          <label for="priority">Priority</label>
+          <select name="priority" id="priority">
+            <option value="">--Please select a priority--</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </li>
+        <li>
+          <label for="project">Project</label>
+          <select type="text" id="project-select">
+            <option value="">--Please select a project--</option>
+          </select>
+        </li>
       </ul>
       <button id="task-confirm" type="button">Confirm</button>
       <button id="task-cancel" type="button">Cancel</button>

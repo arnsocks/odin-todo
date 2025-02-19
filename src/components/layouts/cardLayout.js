@@ -44,7 +44,7 @@ export default function TaskCards(taskList) {
     const myPriority = document.createElement('span');
     const priorityHeading= document.createElement('span');
     priorityHeading.classList.add('task-info-heading');
-    priorityHeading.textContent = 'Description: ';
+    priorityHeading.textContent = 'Priority: ';
     myPriority.textContent = `${task.priority}`;
     priorityItem.appendChild(priorityHeading);
     priorityItem.appendChild(myPriority);

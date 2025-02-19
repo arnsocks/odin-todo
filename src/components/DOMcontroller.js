@@ -21,12 +21,20 @@ export function initEventListeners() {
 
 export function loadProjectBar() {
   let projectBar = document.querySelector("#project-bar");
+  let projectSelect = document.querySelector("#project-select");
   // const projectList = App.listProjects();
   for (const project of App.listProjects()) {
     let myProject = document.createElement("div");
     myProject.textContent = `${project.title}`;
     projectBar.appendChild(myProject);
+    
+    let myProjectOption = document.createElement("option");
+    myProjectOption.value = `${project.id}`;
+    myProjectOption.textContent = `${project.title}`;
+    projectSelect.appendChild(myProjectOption);
   }
+  
+
 }
 
 export function loadComponent(component) {
@@ -43,8 +51,9 @@ function confirmBtnClick(e) {
   const taskTitle = document.querySelector("#task-title");
   const taskDescription = document.querySelector("#task-description");
   const dueDate = document.querySelector("#due-date");
+  const priority = document.querySelector("#priority");
 
-  App.createTask(taskTitle.value, taskDescription.value, dueDate.value);
+  App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value);
   loadComponent(CardLayout(App.listTasks()));
 
   taskTitle.value = '';
