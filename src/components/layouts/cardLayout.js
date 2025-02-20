@@ -20,6 +20,8 @@ export default function TaskCards(taskList) {
     checkbox.name = 'task-checkbox';
     checkbox.id = "#task-checkbox";
     checkbox.classList.add('task-checkbox');
+    checkbox.checked = task.isDone;
+    checkbox.addEventListener("change", toggleTaskHandler);
 
     // Create Task Card Heading
     const titleItem = document.createElement('li');
@@ -89,19 +91,22 @@ export default function TaskCards(taskList) {
     taskCard.appendChild(deleteBtn);
     cardContainer.appendChild(taskCard);
   };
-
-  function deleteTaskHandler(e) {
-    const myTask = APP.getTaskByID(e.target.dataset.taskID);
-    if (confirm (`Are you sure you want to delete task: ${myTask.title}?`)) {
-      APP.deleteTask(e.target.dataset.taskID);
-      renderTasks();
-    }
-    
-  }
-
   return cardContainer;
 }
 
+function deleteTaskHandler(e) {
+  const myTask = APP.getTaskByID(e.target.dataset.taskID);
+  if (confirm (`Are you sure you want to delete task: ${myTask.title}?`)) {
+    APP.deleteTask(myTask.id);
+    renderTasks();
+  }
+}
+
+function toggleTaskHandler(e) {
+  const myTaskID = e.target.parentNode.parentNode.parentNode.dataset.taskID;
+  APP.changeTaskStatus(myTaskID, e.target.checked);
+  
+}
 
 const titleHeading = document.createElement('span');
 titleHeading.classList.add('task-info-heading');

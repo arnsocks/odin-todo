@@ -69,9 +69,7 @@ export default {
   },
 
   getProjectByID(projID) {
-    console.log(`Searching for project with ID: ${projID}`);
     const myProject = projectList.find((project) => project.id == projID);
-    if (myProject) console.log(`Found project with title: ${myProject.title}`);
     return myProject;
   },
 
@@ -83,6 +81,12 @@ export default {
     taskList = [];
     projectList = [];
     Storage.saveProjects(projectList);
+    Storage.saveTasks(taskList);
+  },
+
+  changeTaskStatus(taskID, status) {
+    let myTaskIndex = taskList.findIndex((task) => task.id == taskID);
+    taskList[myTaskIndex].isDone = status;
     Storage.saveTasks(taskList);
   }
 

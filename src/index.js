@@ -7,16 +7,9 @@ import Project from "./components/project.js";
 
 // Storage.deleteAll();
 loadTempTasks();
-DOM.loadComponent(CardLayout(App.listTasks()));
+DOM.renderTasks();
 DOM.loadProjectBar();
 DOM.initEventListeners();
-// console.log(App.listProjects());
-// App.getProjectByID("b44bd646-b44c-4136-9360-5394cfb389e0");
-
-
-
-
-
 
 // Create testing projects and tasks
 // console.log(App.listTasks());
@@ -40,10 +33,5 @@ function loadTempTasks() {
     let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);
     let taskToEdit = App.createTask("Edit this task", "A task to test editing", new Date(Date.now()), "medium", projID);
     App.createTask("New Project Task", "This task in not in the default project", new Date(Date.now()), "low", "8675309");
-    console.log(App.getProjectByID(projID));
-  }
-  
-  
+  } 
 }
-
-// DOM.loadComponent(CardLayout(App.listTasks()));

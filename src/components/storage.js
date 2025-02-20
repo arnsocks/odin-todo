@@ -1,4 +1,7 @@
 // Initialize localStorage arrays if needed
+import Task from "./task";
+import Project from "./project";
+
 if (!localStorage.taskList) localStorage.setItem("taskList", JSON.stringify([]));
 if (!localStorage.projectList) localStorage.setItem("projectList", JSON.stringify([]));
 
@@ -12,6 +15,7 @@ export default {
   },
 
   saveTasks(tasks) {
+    console.log(tasks);
     localStorage.setItem("taskList", JSON.stringify(tasks));
   },
 

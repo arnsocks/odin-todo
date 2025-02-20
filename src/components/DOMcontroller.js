@@ -52,8 +52,7 @@ export function loadComponent(component) {
 
 // *** Event Handler Functions ***
 
-function confirmBtnClick(e) {
-  // e.preventDefault();
+function confirmBtnClick() {
   newTaskDialog.close();
 
   const taskTitle = document.querySelector("#task-title");
