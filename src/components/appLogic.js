@@ -75,6 +75,10 @@ export default {
     return myProject;
   },
 
+  getTaskByID(taskID) {
+    return taskList.find((task) => task.id == taskID);
+  },
+
   deleteAll() {
     taskList = [];
     projectList = [];

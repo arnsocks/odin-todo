@@ -91,8 +91,12 @@ export default function TaskCards(taskList) {
   };
 
   function deleteTaskHandler(e) {
-    APP.deleteTask(e.target.dataset.taskID);
-    renderTasks();
+    const myTask = APP.getTaskByID(e.target.dataset.taskID);
+    if (confirm (`Are you sure you want to delete task: ${myTask.title}?`)) {
+      APP.deleteTask(e.target.dataset.taskID);
+      renderTasks();
+    }
+    
   }
 
   return cardContainer;
