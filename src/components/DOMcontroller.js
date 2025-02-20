@@ -1,15 +1,21 @@
 import App from './appLogic';
 import CardLayout from './layouts/cardLayout';
 
-console.log("Activating the DOM controller");
 const contentDiv = document.querySelector("#content");
 contentDiv.textContent = "This is a test of DOMcontroller";
-
 
 const newTaskDialog = document.querySelector("#new-task-dialog");
 const newTaskBtn = document.querySelector("#new-task");
 const confirmTaskBtn = document.querySelector("#task-confirm");
 const cancelTaskBtn = document.querySelector("#task-cancel");
+
+let displayModeList = ["cardLayout"];
+let defaultDisplayMode = "cardLayout";
+let currentDisplayMode = "cardLayout";
+
+export function renderTasks() {
+  loadComponent(CardLayout(App.listTasks()));
+}
 
 export function initEventListeners() {  
   newTaskBtn.addEventListener("click", () => {
@@ -22,6 +28,8 @@ export function initEventListeners() {
 export function loadProjectBar() {
   let projectBar = document.querySelector("#project-bar");
   let projectSelect = document.querySelector("#project-select");
+  projectSelect.textContent = '';
+  
   // const projectList = App.listProjects();
   for (const project of App.listProjects()) {
     let myProject = document.createElement("div");
@@ -45,7 +53,7 @@ export function loadComponent(component) {
 // *** Event Handler Functions ***
 
 function confirmBtnClick(e) {
-  e.preventDefault();
+  // e.preventDefault();
   newTaskDialog.close();
 
   const taskTitle = document.querySelector("#task-title");

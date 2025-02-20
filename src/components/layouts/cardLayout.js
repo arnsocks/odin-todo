@@ -1,5 +1,6 @@
 // import appLogic from "../appLogic";
 import APP from '../appLogic.js';
+import { renderTasks } from '../DOMcontroller.js';
 
 export default function TaskCards(taskList) {
   const cardContainer = document.createElement('div');
@@ -70,14 +71,29 @@ export default function TaskCards(taskList) {
     projectItem.appendChild(projectHeading);
     projectItem.appendChild(myProject);
 
+    // Create Delete Button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.id = "task-delete-btn";
+    deleteBtn.type = "button";
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.dataset.taskID = task.id;
+    deleteBtn.addEventListener("click", deleteTaskHandler);
+
+
     taskInfoList.appendChild(titleItem);
     taskInfoList.appendChild(descriptionItem);
     taskInfoList.appendChild(dueItem);
     taskInfoList.appendChild(priorityItem);
     taskInfoList.appendChild(projectItem);
     taskCard.appendChild(taskInfoList);
+    taskCard.appendChild(deleteBtn);
     cardContainer.appendChild(taskCard);
   };
+
+  function deleteTaskHandler(e) {
+    APP.deleteTask(e.target.dataset.taskID);
+    renderTasks();
+  }
 
   return cardContainer;
 }
