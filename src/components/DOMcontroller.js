@@ -8,6 +8,10 @@ const newTaskDialog = document.querySelector("#new-task-dialog");
 const newTaskBtn = document.querySelector("#new-task");
 const confirmTaskBtn = document.querySelector("#task-confirm");
 const cancelTaskBtn = document.querySelector("#task-cancel");
+const newProjectDialog = document.querySelector("#new-project-dialog");
+const newProjectBtn = document.querySelector("#new-project-button");
+const confirmProjBtn = document.querySelector("#project-confirm");
+const cancelProjBtn = document.querySelector("#project-cancel");
 
 let displayModeList = ["cardLayout"];
 let defaultDisplayMode = "cardLayout";
@@ -23,18 +27,26 @@ export function initEventListeners() {
   });
   confirmTaskBtn.addEventListener("click", confirmBtnClick);
   cancelTaskBtn.addEventListener("click", () => newTaskDialog.close());
+
+  newProjectBtn.addEventListener("click", () => {
+    newProjectDialog.showModal();
+  });
+  confirmProjBtn.addEventListener("click", confirmProjectClick);
+  cancelTaskBtn.addEventListener("click", () => newProjectDialog.close());
 }
 
 export function loadProjectBar() {
   let projectBar = document.querySelector("#project-bar");
   let projectSelect = document.querySelector("#project-select");
+  let projectList = document.querySelector("#project-list");
   projectSelect.textContent = '';
+  projectList.textContent = '';
   
   // const projectList = App.listProjects();
   for (const project of App.listProjects()) {
-    let myProject = document.createElement("div");
+    let myProject = document.createElement("li");
     myProject.textContent = `${project.title}`;
-    projectBar.appendChild(myProject);
+    projectList.appendChild(myProject);
 
     // This bit updates the list of projects in the select dropdown and should
     // probably live in a page refresh method in the future
@@ -67,4 +79,15 @@ function confirmBtnClick() {
   taskTitle.value = '';
   taskDescription.value = '';
   dueDate.value = new Date(Date.now);
+}
+
+function confirmProjectClick() {
+  newProjectDialog.close();
+
+  const projectTitle = document.querySelector("#project-title");
+  const projectDescription = document.querySelector("#project-description");
+
+  App.createProject(projectTitle.value, projectDescription.value);
+  loadProjectBar();
+
 }

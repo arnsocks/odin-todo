@@ -28,6 +28,7 @@ DOM.initEventListeners();
 function loadTempTasks() {
   let currentTaskList = App.listTasks();
   if (currentTaskList.length === 0) {
+    App.deleteAll();
     let projID = App.createProject("Default");
     App.createTask("test task", "This is a test", new Date(Date.now()), "high", projID);
     let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);
