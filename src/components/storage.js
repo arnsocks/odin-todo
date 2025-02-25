@@ -15,18 +15,12 @@ export default {
   },
 
   saveTasks(tasks) {
-    console.log(tasks);
     localStorage.setItem("taskList", JSON.stringify(tasks));
   },
 
   saveProjects(projects) {
     localStorage.setItem("projectList", JSON.stringify(projects));
-  },
-
-  // deleteAll() {
-  //   localStorage.setItem("taskList", "[]");
-  //   localStorage.setItem("projectList", "[]");
-  // }
+  }
 }
 
 
