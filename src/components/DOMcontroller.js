@@ -32,20 +32,28 @@ export function initEventListeners() {
     newProjectDialog.showModal();
   });
   confirmProjBtn.addEventListener("click", confirmProjectClick);
-  cancelTaskBtn.addEventListener("click", () => newProjectDialog.close());
+  cancelProjBtn.addEventListener("click", () => newProjectDialog.close());
 }
 
-export function loadProjectBar() {
+export function renderProjectBar() {
   let projectBar = document.querySelector("#project-bar");
   let projectSelect = document.querySelector("#project-select");
   let projectList = document.querySelector("#project-list");
   projectSelect.textContent = '';
   projectList.textContent = '';
-  
-  // const projectList = App.listProjects();
+
+  // Create the list of projects on the sidebar
   for (const project of App.listProjects()) {
     let myProject = document.createElement("li");
     myProject.textContent = `${project.title}`;
+    myProject.dataset.projectID = project.id;
+
+     // Create the project deletion button
+    let projDeleteBtn = document.createElement("button");
+    projDeleteBtn.textContent = "delete";
+    projDeleteBtn.addEventListener("click", projDeleteClick);
+    myProject.appendChild(projDeleteBtn);
+
     projectList.appendChild(myProject);
 
     // This bit updates the list of projects in the select dropdown and should
@@ -74,7 +82,7 @@ function confirmBtnClick() {
   const project = document.querySelector("#project-select");
 
   App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
-  loadComponent(CardLayout(App.listTasks()));
+  renderTasks();
 
   taskTitle.value = '';
   taskDescription.value = '';
@@ -88,6 +96,18 @@ function confirmProjectClick() {
   const projectDescription = document.querySelector("#project-description");
 
   App.createProject(projectTitle.value, projectDescription.value);
-  loadProjectBar();
+  renderProjectBar();
 
+  projectTitle.value = '';
+  projectDescription.value = '';
+}
+
+function projDeleteClick(e) {
+  const myProject = App.getProjectByID(e.target.parentNode.dataset.projectID);
+  if (confirm(`Do you want to delete project ${myProject.title} and all of it's tasks?`)) {
+    App.deleteProject(myProject.id);
+    renderProjectBar();
+    renderTasks();
+  }
+  
 }

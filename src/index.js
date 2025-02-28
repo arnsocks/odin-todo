@@ -8,7 +8,7 @@ import Project from "./components/project.js";
 // Storage.deleteAll();
 loadTempTasks();
 DOM.renderTasks();
-DOM.loadProjectBar();
+DOM.renderProjectBar();
 DOM.initEventListeners();
 
 // Create testing projects and tasks
