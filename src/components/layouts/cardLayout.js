@@ -1,6 +1,7 @@
 // import appLogic from "../appLogic";
 import APP from '../appLogic.js';
-import { renderTasks } from '../DOMcontroller.js';
+import { renderTasks, editTaskHandler } from '../DOMcontroller.js';
+import {format} from 'date-fns';
 
 export default function TaskCards(taskList) {
   const cardContainer = document.createElement('div');
@@ -36,7 +37,7 @@ export default function TaskCards(taskList) {
     const dueDateHeading = document.createElement('span');
     dueDateHeading.classList.add('task-info-heading');
     dueDateHeading.textContent = 'Due: '
-    myDueDate.textContent += `${task.dueDate}`;
+    myDueDate.textContent += `${format(task.dueDate, "MMMM dd, uu")}`;
     dueItem.appendChild(dueDateHeading);
     dueItem.appendChild(myDueDate);
 
@@ -81,6 +82,13 @@ export default function TaskCards(taskList) {
     deleteBtn.dataset.taskID = task.id;
     deleteBtn.addEventListener("click", deleteTaskHandler);
 
+    // Create Edit Button
+    const editBtn = document.createElement('button');
+    editBtn.id = "proj-edit-btn";
+    editBtn.textContent = "edit";
+    editBtn.addEventListener("click", editTaskHandler);
+
+
 
     taskInfoList.appendChild(titleItem);
     taskInfoList.appendChild(descriptionItem);
@@ -89,6 +97,7 @@ export default function TaskCards(taskList) {
     taskInfoList.appendChild(projectItem);
     taskCard.appendChild(taskInfoList);
     taskCard.appendChild(deleteBtn);
+    taskCard.appendChild(editBtn);
     cardContainer.appendChild(taskCard);
   };
   return cardContainer;
@@ -105,7 +114,6 @@ function deleteTaskHandler(e) {
 function toggleTaskHandler(e) {
   const myTaskID = e.target.parentNode.parentNode.parentNode.dataset.taskID;
   APP.changeTaskStatus(myTaskID, e.target.checked);
-  
 }
 
 const titleHeading = document.createElement('span');

@@ -4,6 +4,7 @@ import CardLayout from './layouts/cardLayout';
 const contentDiv = document.querySelector("#content");
 contentDiv.textContent = "This is a test of DOMcontroller";
 
+
 const newTaskDialog = document.querySelector("#new-task-dialog");
 const newTaskBtn = document.querySelector("#new-task");
 const confirmTaskBtn = document.querySelector("#task-confirm");
@@ -12,6 +13,12 @@ const newProjectDialog = document.querySelector("#new-project-dialog");
 const newProjectBtn = document.querySelector("#new-project-button");
 const confirmProjBtn = document.querySelector("#project-confirm");
 const cancelProjBtn = document.querySelector("#project-cancel");
+const taskDialogHeading = document.querySelector("#task-dialog-heading");
+const taskTitle = document.querySelector("#task-title");
+const taskDescription = document.querySelector("#task-description");
+const dueDate = document.querySelector("#due-date");
+const priority = document.querySelector("#priority");
+const project = document.querySelector("#project-select");
 
 let displayModeList = ["cardLayout"];
 let defaultDisplayMode = "cardLayout";
@@ -23,10 +30,11 @@ export function renderTasks() {
 
 export function initEventListeners() {  
   newTaskBtn.addEventListener("click", () => {
+    taskDialogHeading.textContent = "Create New Task";
     newTaskDialog.showModal();
   });
   confirmTaskBtn.addEventListener("click", confirmBtnClick);
-  cancelTaskBtn.addEventListener("click", () => newTaskDialog.close());
+  cancelTaskBtn.addEventListener("click", taskCancelClick);
 
   newProjectBtn.addEventListener("click", () => {
     newProjectDialog.showModal();
@@ -53,7 +61,7 @@ export function renderProjectBar() {
     projDeleteBtn.textContent = "delete";
     projDeleteBtn.addEventListener("click", projDeleteClick);
     myProject.appendChild(projDeleteBtn);
-
+    
     projectList.appendChild(myProject);
 
     // This bit updates the list of projects in the select dropdown and should
@@ -72,21 +80,26 @@ export function loadComponent(component) {
 
 // *** Event Handler Functions ***
 
+function taskCancelClick() {
+
+}
+
 function confirmBtnClick() {
   newTaskDialog.close();
 
-  const taskTitle = document.querySelector("#task-title");
-  const taskDescription = document.querySelector("#task-description");
-  const dueDate = document.querySelector("#due-date");
-  const priority = document.querySelector("#priority");
-  const project = document.querySelector("#project-select");
+  // const taskTitle = document.querySelector("#task-title");
+  // const taskDescription = document.querySelector("#task-description");
+  // const dueDate = document.querySelector("#due-date");
+  // const priority = document.querySelector("#priority");
+  // const project = document.querySelector("#project-select");
 
   App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
+  clearTaskInputs();
   renderTasks();
 
-  taskTitle.value = '';
-  taskDescription.value = '';
-  dueDate.value = new Date(Date.now);
+  // taskTitle.value = '';
+  // taskDescription.value = '';
+  // dueDate.value = new Date(Date.now);
 }
 
 function confirmProjectClick() {
@@ -109,5 +122,25 @@ function projDeleteClick(e) {
     renderProjectBar();
     renderTasks();
   }
-  
+}
+
+export function editTaskHandler(e) {
+  const myTask = App.getTaskByID(e.target.parentNode.dataset.taskID);
+  alert(`You are trying to edit task: ${myTask.title}`);
+  taskDialogHeading.textContent = `Edit Task`;
+  taskTitle.value = myTask.title;
+  taskDescription.value = myTask.description;
+  dueDate.value = myTask.dueDate;
+  priority.value = myTask.priority;
+  project.value = App.getProjectByID(myTask.projectID);
+
+  newTaskDialog.showModal();
+}
+
+function clearTaskInputs() {
+  taskTitle.value = '';
+  taskDescription.value = '';
+  dueDate.value = new Date(Date.now);
+  priority.value = '';
+  project.value = '';
 }
