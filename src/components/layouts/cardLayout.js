@@ -84,9 +84,13 @@ export default function TaskCards(taskList) {
 
     // Create Edit Button
     const editBtn = document.createElement('button');
-    editBtn.id = "proj-edit-btn";
+    editBtn.id = "task-edit-btn";
     editBtn.textContent = "edit";
     editBtn.addEventListener("click", editTaskHandler);
+
+    // DEBUG show task ID
+    const taskIDDebug = document.createElement('p');
+    taskIDDebug.textContent = task.id;
 
 
 
@@ -98,6 +102,7 @@ export default function TaskCards(taskList) {
     taskCard.appendChild(taskInfoList);
     taskCard.appendChild(deleteBtn);
     taskCard.appendChild(editBtn);
+    taskCard.appendChild(taskIDDebug);
     cardContainer.appendChild(taskCard);
   };
   return cardContainer;

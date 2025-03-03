@@ -52,19 +52,15 @@ export default {
 
   editTask(taskID, title, description, dueDate, priority, isDone, projectID) {
     // Copy the task and update its fields
-    let myTask = taskList.find((task) => task.id === taskID);
+    let myTaskIndex = taskList.findIndex((task) => task.id === taskID);
+    let myTask = taskList[myTaskIndex];
     myTask.title = title;
     myTask.description = description;
     myTask.dueDate = dueDate;
     myTask.priority = priority;
     myTask.project = projectID;
     myTask.isDone = isDone;
-
-    // Remove the original task
-    this.deleteTask(taskID);
-
-    // Put the new task into storage
-    taskList.push(myTask);
+    taskList.splice(myTaskIndex, 1, myTask);
     Storage.saveTasks(taskList);
   },
 

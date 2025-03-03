@@ -29,11 +29,7 @@ export function renderTasks() {
 }
 
 export function initEventListeners() {  
-  newTaskBtn.addEventListener("click", () => {
-    taskDialogHeading.textContent = "Create New Task";
-    newTaskDialog.showModal();
-  });
-  confirmTaskBtn.addEventListener("click", confirmBtnClick);
+  newTaskBtn.addEventListener("click", newTaskClick);
   cancelTaskBtn.addEventListener("click", taskCancelClick);
 
   newProjectBtn.addEventListener("click", () => {
@@ -80,38 +76,33 @@ export function loadComponent(component) {
 
 // *** Event Handler Functions ***
 
+function newTaskClick() {
+  taskDialogHeading.textContent = "Create New Task";
+  confirmTaskBtn.addEventListener("click", confirmNewTask);
+  newTaskDialog.showModal();
+}
+
 function taskCancelClick() {
   clearTaskInputs();
   newTaskDialog.close();
 }
 
-function confirmBtnClick() {
+function confirmNewTask() {
   newTaskDialog.close();
-
-  // const taskTitle = document.querySelector("#task-title");
-  // const taskDescription = document.querySelector("#task-description");
-  // const dueDate = document.querySelector("#due-date");
-  // const priority = document.querySelector("#priority");
-  // const project = document.querySelector("#project-select");
 
   App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
   clearTaskInputs();
   renderTasks();
 
-  // taskTitle.value = '';
-  // taskDescription.value = '';
-  // dueDate.value = new Date(Date.now);
+  confirmTaskBtn.removeEventListener("click", confirmNewTask);
 }
 
 function confirmProjectClick() {
   newProjectDialog.close();
-
   const projectTitle = document.querySelector("#project-title");
   const projectDescription = document.querySelector("#project-description");
-
   App.createProject(projectTitle.value, projectDescription.value);
   renderProjectBar();
-
   projectTitle.value = '';
   projectDescription.value = '';
 }
@@ -127,13 +118,15 @@ function projDeleteClick(e) {
 
 export function editTaskHandler(e) {
   const myTask = App.getTaskByID(e.target.parentNode.dataset.taskID);
-  alert(`You are trying to edit task: ${myTask.title}`);
   taskDialogHeading.textContent = `Edit Task`;
   taskTitle.value = myTask.title;
   taskDescription.value = myTask.description;
   dueDate.value = myTask.dueDate;
   priority.value = myTask.priority;
   project.value = App.getProjectByID(myTask.projectID);
+
+  confirmTaskBtn.dataset.taskID = `${myTask.id}`;
+  confirmTaskBtn.addEventListener("click", confirmEditTask);
 
   newTaskDialog.showModal();
 }
@@ -144,4 +137,15 @@ function clearTaskInputs() {
   dueDate.value = new Date(Date.now);
   priority.value = '';
   project.value = '';
+}
+
+function confirmEditTask(e) {
+  newTaskDialog.close();
+  const myTaskID = e.target.dataset.taskID;
+  const myTask = App.getTaskByID(myTaskID);
+  App.editTask(myTaskID, taskTitle.value, taskDescription.value, dueDate.value, priority.value, myTask.isDone, project.value);
+  confirmTaskBtn.removeEventListener("click", confirmEditTask);
+  confirmTaskBtn.dataset.taskID = '';
+  clearTaskInputs();
+  renderTasks();
 }
