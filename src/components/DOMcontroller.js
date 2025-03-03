@@ -81,7 +81,8 @@ export function loadComponent(component) {
 // *** Event Handler Functions ***
 
 function taskCancelClick() {
-
+  clearTaskInputs();
+  newTaskDialog.close();
 }
 
 function confirmBtnClick() {
