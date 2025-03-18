@@ -92,8 +92,6 @@ export default function TaskCards(taskList) {
     const taskIDDebug = document.createElement('p');
     taskIDDebug.textContent = task.id;
 
-
-
     taskInfoList.appendChild(titleItem);
     taskInfoList.appendChild(descriptionItem);
     taskInfoList.appendChild(dueItem);

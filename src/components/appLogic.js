@@ -60,6 +60,8 @@ export default {
     myTask.priority = priority;
     myTask.project = projectID;
     myTask.isDone = isDone;
+
+    // Put the updated task back in the taskList
     taskList.splice(myTaskIndex, 1, myTask);
     Storage.saveTasks(taskList);
   },

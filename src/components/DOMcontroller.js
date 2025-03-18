@@ -23,9 +23,12 @@ const project = document.querySelector("#project-select");
 let displayModeList = ["cardLayout"];
 let defaultDisplayMode = "cardLayout";
 let currentDisplayMode = "cardLayout";
+let currentDisplayProject;
 
 export function renderTasks() {
-  loadComponent(CardLayout(App.listTasks()));
+
+  loadComponent(CardLayout(App.listTasks(currentDisplayProject)));
+
 }
 
 export function initEventListeners() {  
@@ -47,10 +50,16 @@ export function renderProjectBar() {
   projectList.textContent = '';
 
   // Create the list of projects on the sidebar
+  let allProj = document.createElement("li");
+  allProj.textContent = "View All Projects";
+  allProj.addEventListener("click", filterProjectClick);
+  projectList.appendChild(allProj);
+
   for (const project of App.listProjects()) {
     let myProject = document.createElement("li");
     myProject.textContent = `${project.title}`;
     myProject.dataset.projectID = project.id;
+    myProject.addEventListener("click", filterProjectClick);
 
      // Create the project deletion button
     let projDeleteBtn = document.createElement("button");
@@ -148,4 +157,12 @@ function confirmEditTask(e) {
   confirmTaskBtn.dataset.taskID = '';
   clearTaskInputs();
   renderTasks();
+}
+
+function filterProjectClick(e) {
+  if (e.target.dataset.projectID) {
+    currentDisplayProject = e.target.dataset.projectID;
+  } else currentDisplayProject = null;
+  renderTasks();
+
 }
