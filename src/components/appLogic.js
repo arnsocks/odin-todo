@@ -13,8 +13,8 @@ export default {
     return myTask.id;
   },
   
-  createProject(title) {
-    const myProj = new Project(title);
+  createProject(title, description) {
+    const myProj = new Project(title, description);
     projectList.push(myProj);
     Storage.saveProjects(projectList);
     return myProj.id;

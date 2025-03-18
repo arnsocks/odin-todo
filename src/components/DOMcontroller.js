@@ -19,6 +19,7 @@ const taskDescription = document.querySelector("#task-description");
 const dueDate = document.querySelector("#due-date");
 const priority = document.querySelector("#priority");
 const project = document.querySelector("#project-select");
+let mainHeader = document.querySelector("#main-header");
 
 let displayModeList = ["cardLayout"];
 let defaultDisplayMode = "cardLayout";
@@ -26,10 +27,26 @@ let currentDisplayMode = "cardLayout";
 let currentDisplayProject;
 
 export function renderTasks() {
-
   loadComponent(CardLayout(App.listTasks(currentDisplayProject)));
+  
 
+  mainHeader.textContent = '';
+  let mainHeading = document.createElement("h1");
+  mainHeading.id = "main-heading";
+  mainHeading.textContent = "All Tasks";
+  mainHeader.appendChild(mainHeading);
+
+  if (currentDisplayProject) {
+    let currentProject = App.getProjectByID(currentDisplayProject);
+    alert(`Loading tasks for project ${currentDisplayProject}`);
+    mainHeading.textContent = currentProject.title;
+    let projectDescriptionHeading = document.createElement("p");
+    projectDescriptionHeading.textContent = currentProject.description;
+    mainHeader.appendChild(projectDescriptionHeading);
+  };
 }
+
+  
 
 export function initEventListeners() {  
   newTaskBtn.addEventListener("click", newTaskClick);
@@ -51,15 +68,19 @@ export function renderProjectBar() {
 
   // Create the list of projects on the sidebar
   let allProj = document.createElement("li");
-  allProj.textContent = "View All Projects";
-  allProj.addEventListener("click", filterProjectClick);
+  let allProjBtn = document.createElement("button");
+  allProjBtn.textContent = "View All Tasks";
+  allProjBtn.addEventListener("click", filterProjectClick);
+  allProj.appendChild(allProjBtn);
   projectList.appendChild(allProj);
 
   for (const project of App.listProjects()) {
     let myProject = document.createElement("li");
-    myProject.textContent = `${project.title}`;
-    myProject.dataset.projectID = project.id;
-    myProject.addEventListener("click", filterProjectClick);
+    let myProjectBtn = document.createElement("button");
+    myProjectBtn.textContent = `${project.title}`;
+    myProjectBtn.dataset.projectID = project.id;
+    myProjectBtn.addEventListener("click", filterProjectClick);
+    myProject.appendChild(myProjectBtn);
 
      // Create the project deletion button
     let projDeleteBtn = document.createElement("button");
@@ -162,6 +183,7 @@ function confirmEditTask(e) {
 function filterProjectClick(e) {
   if (e.target.dataset.projectID) {
     currentDisplayProject = e.target.dataset.projectID;
+
   } else currentDisplayProject = null;
   renderTasks();
 
