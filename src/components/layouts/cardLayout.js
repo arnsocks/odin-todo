@@ -88,9 +88,12 @@ export default function TaskCards(taskList) {
     editBtn.textContent = "edit";
     editBtn.addEventListener("click", editTaskHandler);
 
-    // DEBUG show task ID
+    // DEBUG show task ID & created Date  
     const taskIDDebug = document.createElement('p');
     taskIDDebug.textContent = task.id;
+    const taskCreateDateDebug = document.createElement('p');
+    taskCreateDateDebug.textContent = `Create: ${task.dateCreated}`;
+
 
     taskInfoList.appendChild(titleItem);
     taskInfoList.appendChild(descriptionItem);
@@ -101,6 +104,7 @@ export default function TaskCards(taskList) {
     taskCard.appendChild(deleteBtn);
     taskCard.appendChild(editBtn);
     taskCard.appendChild(taskIDDebug);
+    taskCard.appendChild(taskCreateDateDebug);
     cardContainer.appendChild(taskCard);
   };
   return cardContainer;

@@ -93,7 +93,18 @@ export default {
     switch (field) {
       case "dueDate":
         alert("We are trying to sort by due date");
-        return taskList.sort((a,b) => compareAsc(a.dueDate, b.dueDate));
+        return taskList.toSorted((a,b) => compareAsc(a.dueDate, b.dueDate));
+      case "createdDate":
+        alert("We are sorting my createDate");
+        return taskList.toSorted((a,b) => compareAsc(a.dateCreated, b.dateCreated));
+      case "priority":
+        alert("We are sorting by priority");
+        return taskList; // THIS NEEDS COMPLETING
+      case "alphabetical":
+        alert("We are sorting alphabetically");
+        return taskList.toSorted((a,b) => a.title.localeCompare(b.title));
+      default:
+        return taskList;
     }
   }
 

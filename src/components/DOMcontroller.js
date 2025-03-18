@@ -18,7 +18,11 @@ const taskDescription = document.querySelector("#task-description");
 const dueDate = document.querySelector("#due-date");
 const priority = document.querySelector("#priority");
 const project = document.querySelector("#project-select");
-const sortBtn = document.querySelector("#sort-date-btn");
+const dueDateSortBtn = document.querySelector("#sort-date-btn");
+const createDateSortBtn = document.querySelector("#sort-createDate-btn");
+const prioritySortBtn = document.querySelector("#sort-priority-btn");
+const alphaSortBtn = document.querySelector("#sort-alpha-btn");
+
 
 let mainHeader = document.querySelector("#main-header");
 
@@ -64,10 +68,12 @@ export function initEventListeners() {
   confirmProjBtn.addEventListener("click", confirmProjectClick);
   cancelProjBtn.addEventListener("click", () => newProjectDialog.close());
 
-  sortBtn.addEventListener("click", () => {
-    currentSortMethod = "dueDate";
-    renderTasks();
-  })
+  dueDateSortBtn.addEventListener("click", sortTaskClick);
+  createDateSortBtn.addEventListener("click", sortTaskClick);
+  prioritySortBtn.addEventListener("click", sortTaskClick);
+  alphaSortBtn.addEventListener("click", sortTaskClick);
+
+  createDateSortBtn.addEventListener("click" () )
 }
 
 export function renderProjectBar() {
@@ -198,4 +204,9 @@ function filterProjectClick(e) {
   } else currentDisplayProject = null;
   renderTasks();
 
+}
+
+function sortTaskClick(e) {
+  currentSortMethod = e.target.value;
+  renderTasks();
 }
