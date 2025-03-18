@@ -1,6 +1,7 @@
 import Project from "./project.js";
 import Task from "./task.js";
 import Storage from "./storage.js";
+import { compareAsc } from "date-fns";
 
 let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();
@@ -86,6 +87,14 @@ export default {
     let myTaskIndex = taskList.findIndex((task) => task.id == taskID);
     taskList[myTaskIndex].isDone = status;
     Storage.saveTasks(taskList);
+  },
+
+  sortTasks(taskList, field) {
+    switch (field) {
+      case "dueDate":
+        alert("We are trying to sort by due date");
+        return taskList.sort((a,b) => compareAsc(a.dueDate, b.dueDate));
+    }
   }
 
 };

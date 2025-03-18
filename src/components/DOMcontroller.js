@@ -4,7 +4,6 @@ import CardLayout from './layouts/cardLayout';
 const contentDiv = document.querySelector("#content");
 contentDiv.textContent = "This is a test of DOMcontroller";
 
-
 const newTaskDialog = document.querySelector("#new-task-dialog");
 const newTaskBtn = document.querySelector("#new-task");
 const confirmTaskBtn = document.querySelector("#task-confirm");
@@ -19,17 +18,27 @@ const taskDescription = document.querySelector("#task-description");
 const dueDate = document.querySelector("#due-date");
 const priority = document.querySelector("#priority");
 const project = document.querySelector("#project-select");
+const sortBtn = document.querySelector("#sort-date-btn");
+
 let mainHeader = document.querySelector("#main-header");
 
 let displayModeList = ["cardLayout"];
 let defaultDisplayMode = "cardLayout";
 let currentDisplayMode = "cardLayout";
 let currentDisplayProject;
+let currentSortMethod;
 
 export function renderTasks() {
-  loadComponent(CardLayout(App.listTasks(currentDisplayProject)));
-  
+  // Load the task module
+  let myTaskList = App.listTasks(currentDisplayProject);
 
+  if (currentSortMethod) {
+    myTaskList = App.sortTasks(myTaskList, currentSortMethod);
+    console.table(myTaskList);
+  }
+  loadComponent(CardLayout(myTaskList));
+  
+  // Update the heading to show the currently selected project info.
   mainHeader.textContent = '';
   let mainHeading = document.createElement("h1");
   mainHeading.id = "main-heading";
@@ -38,15 +47,12 @@ export function renderTasks() {
 
   if (currentDisplayProject) {
     let currentProject = App.getProjectByID(currentDisplayProject);
-    alert(`Loading tasks for project ${currentDisplayProject}`);
     mainHeading.textContent = currentProject.title;
     let projectDescriptionHeading = document.createElement("p");
     projectDescriptionHeading.textContent = currentProject.description;
     mainHeader.appendChild(projectDescriptionHeading);
   };
 }
-
-  
 
 export function initEventListeners() {  
   newTaskBtn.addEventListener("click", newTaskClick);
@@ -57,6 +63,11 @@ export function initEventListeners() {
   });
   confirmProjBtn.addEventListener("click", confirmProjectClick);
   cancelProjBtn.addEventListener("click", () => newProjectDialog.close());
+
+  sortBtn.addEventListener("click", () => {
+    currentSortMethod = "dueDate";
+    renderTasks();
+  })
 }
 
 export function renderProjectBar() {
