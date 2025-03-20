@@ -72,8 +72,6 @@ export function initEventListeners() {
   createDateSortBtn.addEventListener("click", sortTaskClick);
   prioritySortBtn.addEventListener("click", sortTaskClick);
   alphaSortBtn.addEventListener("click", sortTaskClick);
-
-  createDateSortBtn.addEventListener("click" () )
 }
 
 export function renderProjectBar() {

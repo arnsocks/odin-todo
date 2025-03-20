@@ -49,21 +49,20 @@
         </li>
         <li>
           <label for="task-description">Description:</label>
-          <textarea id="task-description" name="task-description" rows="1">
-            Task description...
+          <textarea id="task-description" name="task-description" rows="1" placeholder="Task description...">
           </textarea>
         </li>
         <li>
           <label for="due-date">Due date:</label>
-          <input type="date" id="due-date" name="due-date" />
+          <input type="date" id="due-date" name="due-date" required/>
         </li>
         <li>
           <label for="priority">Priority</label>
           <select name="priority" id="priority" required>
             <option value="">--Please select a priority--</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </li>
         <li>

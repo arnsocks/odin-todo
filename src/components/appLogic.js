@@ -5,6 +5,7 @@ import { compareAsc } from "date-fns";
 
 let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();
+const priorityList = ["High, Medium", "Low"];
 
 export default {
   createTask(title, description, dueDate, priority, projectID, taskID) {
@@ -99,13 +100,17 @@ export default {
         return taskList.toSorted((a,b) => compareAsc(a.dateCreated, b.dateCreated));
       case "priority":
         alert("We are sorting by priority");
-        return taskList; // THIS NEEDS COMPLETING
+        return taskList.toSorted((a,b) => priorityList.indexOf(a.priority) - priorityList.indexOf(b.priority));
       case "alphabetical":
         alert("We are sorting alphabetically");
         return taskList.toSorted((a,b) => a.title.localeCompare(b.title));
       default:
         return taskList;
     }
+  },
+
+  getPriorityList() {
+    return priorityList;
   }
 
 };
