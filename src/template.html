@@ -40,7 +40,7 @@
   </div>
 
   <dialog id="new-task-dialog">
-    <form method="dialog">
+    <form method="dialog" action="">
       <h3 id="task-dialog-heading"></h3>
       <ul>
         <li>
@@ -49,7 +49,7 @@
         </li>
         <li>
           <label for="task-description">Description:</label>
-          <textarea id="task-description" name="task-description" rows="1" placeholder="Task description...">
+          <textarea id="task-description" name="task-description" rows="2" placeholder="Task description...">
           </textarea>
         </li>
         <li>
@@ -67,18 +67,19 @@
         </li>
         <li>
           <label for="project-select">Project</label>
-          <select type="text" id="project-select" required>
+          <select type="text" id="project-select">
             <option value="">--Please select a project--</option>
           </select>
         </li>
       </ul>
-      <button id="task-confirm" type="button">Confirm</button>
-      <button id="task-cancel" formmethod="dialog">Cancel</button>
+      <!-- <button id="task-confirm" type="button" value="default">Confirm</button> -->
+      <button id="task-confirm">submit</button>
+      <button id="task-cancel" formmethod="dialog" value="cancel">Cancel</button>
     </form>
   </dialog>
   
   <dialog id="new-project-dialog">
-    <form>
+    <form action="">
       <h3>Create New Project</h3>
       <ul>
         <li>
@@ -92,8 +93,8 @@
           </textarea>
         </li>
       </ul>
-      <button id="project-confirm" formmethod="dialog">Confirm</button>
-      <button id="project-cancel" type="button">Cancel</button>
+      <button id="project-confirm" type="submit" value="default">Confirm</button>
+      <button id="project-cancel" type="button" value="cancel">Cancel</button>
     </form>
 
   </dialog>

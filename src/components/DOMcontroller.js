@@ -124,6 +124,7 @@ export function loadComponent(component) {
 function newTaskClick() {
   taskDialogHeading.textContent = "Create New Task";
   confirmTaskBtn.addEventListener("click", confirmNewTask);
+  dueDate.valueAsDate = new Date();
   newTaskDialog.showModal();
 }
 
@@ -132,10 +133,14 @@ function taskCancelClick() {
   newTaskDialog.close();
 }
 
-function confirmNewTask() {
-  newTaskDialog.close();
+function confirmNewTask(e) {
+  // e.preventDefault();
+  
+  if (!testTaskValidity()) return;
 
+  console.log (`Creating a task with title ${taskTitle.value} desc: ${taskDescription.value}, priority: ${priority.value} and project: ${project.value}`);
   App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
+  newTaskDialog.close();
   clearTaskInputs();
   renderTasks();
 
@@ -185,7 +190,8 @@ function clearTaskInputs() {
 }
 
 function confirmEditTask(e) {
-  newTaskDialog.close();
+  // e.preventDefault();
+  // newTaskDialog.close();
   const myTaskID = e.target.dataset.taskID;
   const myTask = App.getTaskByID(myTaskID);
   App.editTask(myTaskID, taskTitle.value, taskDescription.value, dueDate.value, priority.value, myTask.isDone, project.value);
@@ -207,4 +213,11 @@ function filterProjectClick(e) {
 function sortTaskClick(e) {
   currentSortMethod = e.target.value;
   renderTasks();
+}
+
+function testTaskValidity() {
+  if (taskTitle.value == '' || priority.value == ''){
+    return false;
+  }
+  else return true;
 }

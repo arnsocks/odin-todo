@@ -30,9 +30,9 @@ function loadTempTasks() {
   if (currentTaskList.length === 0) {
     App.deleteAll();
     let projID = App.createProject("Default");
-    App.createTask("test task", "This is a test", new Date(Date.now()), "high", projID);
-    let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "low", projID);
-    let taskToEdit = App.createTask("Edit this task", "A task to test editing", new Date(Date.now()), "medium", projID);
-    App.createTask("New Project Task", "This task in not in the default project", new Date(Date.now()), "low", "8675309");
+    App.createTask("test task", "This is a test", new Date(Date.now()), "High", projID);
+    let taskToDelete = App.createTask("Task2", "A second test task", new Date(Date.now() + 120000), "Low", projID);
+    let taskToEdit = App.createTask("Edit this task", "A task to test editing", new Date(Date.now()), "Medium", projID);
+    App.createTask("New Project Task", "This task in not in the default project", new Date(Date.now()), "Low", "8675309");
   } 
 }
