@@ -136,7 +136,7 @@ function taskCancelClick() {
 function confirmNewTask(e) {
   // e.preventDefault();
   
-  if (!testTaskValidity()) return;
+  if (!testInputValidity(taskTitle.value, priority.value)) return;
 
   console.log (`Creating a task with title ${taskTitle.value} desc: ${taskDescription.value}, priority: ${priority.value} and project: ${project.value}`);
   App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
@@ -148,10 +148,16 @@ function confirmNewTask(e) {
 }
 
 function confirmProjectClick() {
-  newProjectDialog.close();
+
+  
+
   const projectTitle = document.querySelector("#project-title");
   const projectDescription = document.querySelector("#project-description");
+  if (!testInputValidity(projectTitle.value)) return;
+
   App.createProject(projectTitle.value, projectDescription.value);
+  
+  newProjectDialog.close();
   renderProjectBar();
   projectTitle.value = '';
   projectDescription.value = '';
@@ -215,9 +221,12 @@ function sortTaskClick(e) {
   renderTasks();
 }
 
-function testTaskValidity() {
-  if (taskTitle.value == '' || priority.value == ''){
-    return false;
+function testInputValidity(...args) {
+  // if (taskTitle.value == '' || priority.value == ''){
+  //   return false;
+  // }
+  for (const arg of args) {
+    if (arg == '') return false;
   }
-  else return true;
+  return true;
 }
