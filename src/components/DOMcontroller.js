@@ -177,7 +177,7 @@ export function editTaskHandler(e) {
   taskDialogHeading.textContent = `Edit Task`;
   taskTitle.value = myTask.title;
   taskDescription.value = myTask.description;
-  dueDate.value = myTask.dueDate;
+  dueDate.valueAsDate = new Date(myTask.dueDate);
   priority.value = myTask.priority;
   project.value = App.getProjectByID(myTask.projectID);
 
@@ -222,9 +222,6 @@ function sortTaskClick(e) {
 }
 
 function testInputValidity(...args) {
-  // if (taskTitle.value == '' || priority.value == ''){
-  //   return false;
-  // }
   for (const arg of args) {
     if (arg == '') return false;
   }
