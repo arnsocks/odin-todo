@@ -179,13 +179,7 @@ export function editTaskHandler(e) {
   taskDescription.value = myTask.description;
   dueDate.valueAsDate = new Date(myTask.dueDate);
   priority.value = myTask.priority;
-  // alert (`We are looking for the project with id ${myTask.project}`);
-  // const myProj = App.getProjectByID(myTask.projectID);
-  // project.value = myProj.title;
-  const myProjName = App.getProjectByID(myTask.project).title;
-  const myProjId = myTask.project;
-  project.value = myProjId;
-  alert (`This task is assigned to project: ${myProjName}`);
+  project.value = myTask.project;
 
   confirmTaskBtn.dataset.taskID = `${myTask.id}`;
   confirmTaskBtn.addEventListener("click", confirmEditTask);
@@ -203,6 +197,9 @@ function clearTaskInputs() {
 
 function confirmEditTask(e) {
   // e.preventDefault();
+
+  if (!testInputValidity(taskTitle.value, priority.value)) return;
+  
   newTaskDialog.close();
   const myTaskID = e.target.dataset.taskID;
   const myTask = App.getTaskByID(myTaskID);
