@@ -40,7 +40,7 @@ export function renderTasks() {
     myTaskList = App.sortTasks(myTaskList, currentSortMethod);
     console.table(myTaskList);
   }
-  loadComponent(CardLayout(myTaskList));
+  loadComponent(CardLayout(myTaskList)); 
   
   // Update the heading to show the currently selected project info.
   mainHeader.textContent = '';
@@ -91,15 +91,17 @@ export function renderProjectBar() {
 
   for (const project of App.listProjects()) {
     let myProject = document.createElement("li");
+    myProject.dataset.projectID = project.id;
     let myProjectBtn = document.createElement("button");
     myProjectBtn.textContent = `${project.title}`;
-    myProjectBtn.dataset.projectID = project.id;
+    // myProjectBtn.dataset.projectID = project.id;
     myProjectBtn.addEventListener("click", filterProjectClick);
     myProject.appendChild(myProjectBtn);
 
      // Create the project deletion button
     let projDeleteBtn = document.createElement("button");
     projDeleteBtn.textContent = "delete";
+    // projDeleteBtn.dataset.projectID = project.id;
     projDeleteBtn.addEventListener("click", projDeleteClick);
     myProject.appendChild(projDeleteBtn);
     
@@ -167,6 +169,9 @@ function projDeleteClick(e) {
   const myProject = App.getProjectByID(e.target.parentNode.dataset.projectID);
   if (confirm(`Do you want to delete project ${myProject.title} and all of it's tasks?`)) {
     App.deleteProject(myProject.id);
+    if (myProject.id === currentDisplayProject) {
+      currentDisplayProject = null;
+    }
     renderProjectBar();
     renderTasks();
   }
@@ -199,7 +204,7 @@ function confirmEditTask(e) {
   // e.preventDefault();
 
   if (!testInputValidity(taskTitle.value, priority.value)) return;
-  
+
   newTaskDialog.close();
   const myTaskID = e.target.dataset.taskID;
   const myTask = App.getTaskByID(myTaskID);
@@ -211,8 +216,8 @@ function confirmEditTask(e) {
 }
 
 function filterProjectClick(e) {
-  if (e.target.dataset.projectID) {
-    currentDisplayProject = e.target.dataset.projectID;
+  if (e.target.parentNode.dataset.projectID) {
+    currentDisplayProject = e.target.parentNode.dataset.projectID;
 
   } else currentDisplayProject = null;
   renderTasks();
