@@ -5,7 +5,7 @@ import { compareAsc } from "date-fns";
 
 let taskList = Storage.loadTasks();
 let projectList = Storage.loadProjects();
-const priorityList = ["High, Medium", "Low"];
+const priorityList = ["High", "Medium", "Low"];
 
 export default {
   createTask(title, description, dueDate, priority, projectID, taskID) {

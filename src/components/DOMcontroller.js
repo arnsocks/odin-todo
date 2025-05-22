@@ -92,16 +92,15 @@ export function renderProjectBar() {
   for (const project of App.listProjects()) {
     let myProject = document.createElement("li");
     myProject.dataset.projectID = project.id;
+    myProject.classList.add("project");
     let myProjectBtn = document.createElement("button");
     myProjectBtn.textContent = `${project.title}`;
-    // myProjectBtn.dataset.projectID = project.id;
     myProjectBtn.addEventListener("click", filterProjectClick);
     myProject.appendChild(myProjectBtn);
 
      // Create the project deletion button
     let projDeleteBtn = document.createElement("button");
     projDeleteBtn.textContent = "delete";
-    // projDeleteBtn.dataset.projectID = project.id;
     projDeleteBtn.addEventListener("click", projDeleteClick);
     myProject.appendChild(projDeleteBtn);
     
