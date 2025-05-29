@@ -173,6 +173,10 @@ button:hover {
   padding: 1rem;
 }
 
+.task-card.hidden {
+  display: none;
+}
+
 .task-card button {
   margin-right: 0.5rem;
 }

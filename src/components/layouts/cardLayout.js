@@ -1,6 +1,5 @@
-// import appLogic from "../appLogic";
 import APP from '../appLogic.js';
-import { renderTasks, editTaskHandler } from '../DOMcontroller.js';
+import {editTaskHandler, deleteTaskHandler, toggleTaskHandler, showComplete} from '../DOMcontroller.js';
 import {format, parseISO} from 'date-fns';
 
 export default function TaskCards(taskList) {
@@ -11,6 +10,9 @@ export default function TaskCards(taskList) {
     const taskCard = document.createElement('div');
     taskCard.classList.add('task-card');
     taskCard.dataset.taskID = task.id;
+    if (task.isDone && !showComplete) {
+      taskCard.classList.add('hidden');
+    }
 
     const taskInfoList = document.createElement('ul');
     taskInfoList.classList.add('task-info-list');
@@ -103,18 +105,7 @@ export default function TaskCards(taskList) {
   return cardContainer;
 }
 
-function deleteTaskHandler(e) {
-  const myTask = APP.getTaskByID(e.target.dataset.taskID);
-  if (confirm (`Are you sure you want to delete task: ${myTask.title}?`)) {
-    APP.deleteTask(myTask.id);
-    renderTasks();
-  }
-}
 
-function toggleTaskHandler(e) {
-  const myTaskID = e.target.parentNode.parentNode.parentNode.dataset.taskID;
-  APP.changeTaskStatus(myTaskID, e.target.checked);
-}
 
 const titleHeading = document.createElement('span');
 titleHeading.classList.add('task-info-heading');

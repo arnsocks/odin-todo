@@ -22,6 +22,7 @@ const dueDateSortBtn = document.querySelector("#sort-date-btn");
 const createDateSortBtn = document.querySelector("#sort-createDate-btn");
 const prioritySortBtn = document.querySelector("#sort-priority-btn");
 const alphaSortBtn = document.querySelector("#sort-alpha-btn");
+const showCompleteBtn = document.querySelector("#toggle-complete-btn");
 
 
 let mainHeader = document.querySelector("#main-header");
@@ -29,6 +30,7 @@ let mainHeader = document.querySelector("#main-header");
 let displayModeList = ["cardLayout"];
 let defaultDisplayMode = "cardLayout";
 let currentDisplayMode = "cardLayout";
+export let showComplete = false;
 let currentDisplayProject;
 let currentSortMethod;
 
@@ -72,6 +74,8 @@ export function initEventListeners() {
   createDateSortBtn.addEventListener("click", sortTaskClick);
   prioritySortBtn.addEventListener("click", sortTaskClick);
   alphaSortBtn.addEventListener("click", sortTaskClick);
+  showCompleteBtn.addEventListener("click", toggleCompleteClick);
+
 }
 
 export function renderProjectBar() {
@@ -227,6 +231,25 @@ function filterProjectClick(e) {
 function sortTaskClick(e) {
   currentSortMethod = e.target.value;
   renderTasks();
+}
+
+function toggleCompleteClick() {
+  showComplete = !showComplete;
+  renderTasks();
+}
+
+export function deleteTaskHandler(e) {
+  const myTask = App.getTaskByID(e.target.dataset.taskID);
+  if (confirm (`Are you sure you want to delete task: ${myTask.title}?`)) {
+    App.deleteTask(myTask.id);
+    renderTasks();
+  }
+}
+
+export function toggleTaskHandler(e) {
+  const myTaskID = e.target.parentNode.parentNode.parentNode.dataset.taskID;
+  App.changeTaskStatus(myTaskID, e.target.checked);
+
 }
 
 function testInputValidity(...args) {
