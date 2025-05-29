@@ -52,10 +52,22 @@ ul, ol, li {
   --dark: #41576E;
   --mid:  #ACE;
   --light: #E0F0FF;
+  --text: #1C3043;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+button {
+  border: none;
+  border-radius: 3px;
+  background-color: var(--light);
+  padding: 0.2rem;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 #wrapper {
@@ -66,7 +78,7 @@ body {
 
 #sidebar {
   background-color: var(--dark);
-  color: white;
+  color: var(--light);
   padding: 1rem;
   /* border-right: 2px solid rgb(51, 78, 105); */
   box-shadow: 5px 2px 5px rgba(0,0,0,0.1);
@@ -75,7 +87,6 @@ body {
 #logo {
   text-align: center;
   padding-bottom: 2rem;
-  color: white;
 }
 
 #wordmark {
@@ -90,6 +101,18 @@ body {
   margin-top: -1rem;
 }
 
+.add-btn {
+  background-image: url(./images/add.svg);
+  background-repeat: no-repeat;
+  padding-left: 1.5rem;
+  width: 8em;
+  text-align: center;
+}
+
+#project-bar {
+  margin-top: 2rem;
+}
+
 #project-bar h2 {
   text-align: center;
 }
@@ -97,7 +120,7 @@ body {
 #project-bar h2::after {
   display: block;
   content: "";
-  border-top: .1rem solid white;
+  border-top: .1rem solid var(--light);
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -115,7 +138,15 @@ body {
 #project-bar .project button {
   border: none;
   background-color: transparent;
-  color: white;
+  color: var(--light);
+}
+
+#project-bar .delete-btn {
+  background:url(./images/delete_light.svg) no-repeat;
+  cursor:pointer;
+  width: 2em;
+  height: 2em;
+  border: none;
 }
 
 .project button:hover {
@@ -125,6 +156,7 @@ body {
 #main {
   background-color: var(--mid);
   padding: 1rem;
+  color: var(--text);
 }
 
 .card-container {
@@ -132,22 +164,90 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 1fr;
   gap: 1rem;
-  padding: 1rem;
   position: relative;
 }
 
 .task-card {
-  /* background-color: rgba(255,255,255,0.5); */
   background-color: var(--light);
-  /* border: 1px solid rebeccapurple; */
   border-radius: 3px;
   padding: 1rem;
-  /* box-shadow: 5px 2px 5px rgba(0,0,0,0.1); */
+}
+
+.task-card button {
+  margin-right: 0.5rem;
+}
+
+.task-card .delete-btn {
+  background:url(./images/delete.svg) no-repeat;
+  cursor:pointer;
+  width: 2em;
+  height: 2em;
+  border: none;
+}
+
+.task-card .edit-btn {
+  background:url(./images/edit.svg) no-repeat;
+  cursor:pointer;
+  width: 2em;
+  height: 2em;
+  border: none;
+}
+
+.task-card button:hover {
+  background-color: rgba(0,0,0,0.1);
 }
 
 .task-info-heading {
   font-weight: bold;
 }
 
+.task-card input[type="checkbox"] {
+  appearance: none;
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  border: 2px solid var(--text);
+  border-radius: 3px;
+  color: var(--light);
+}
 
+.task-card input[type="checkbox"]:hover {
+  cursor: pointer;
+  box-shadow: inset 0 0 0 2px var(--text);
+}
+
+.task-card input[type="checkbox"]:checked {
+  background-color: var(--dark);
+}
+
+.task-card input[type="checkbox"]::before {
+  content: "✔";
+  position: absolute;
+  font-size: 1.5em;
+  right: -1px;
+  top: -0.3em;
+  visibility: hidden;
+}
+
+.task-card input[type="checkbox"]:checked::before {
+  visibility: visible;
+}
+
+dialog{
+  width: 400px;
+  /* min-height: 300px; */
+  margin: auto;
+  border: none;
+  color: var(--text);
+  background-color: var(--light);
+}
+
+dialog::backdrop {
+  background-color:rgba(0, 0, 0, 0.4);
+}
+
+dialog button {
+  background-color: var(--dark);
+  color: var(--light);
+}
 /* DEV - DEBUGGING */

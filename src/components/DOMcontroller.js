@@ -100,7 +100,8 @@ export function renderProjectBar() {
 
      // Create the project deletion button
     let projDeleteBtn = document.createElement("button");
-    projDeleteBtn.textContent = "delete";
+    projDeleteBtn.textContent = "";
+    projDeleteBtn.classList.add("delete-btn");
     projDeleteBtn.addEventListener("click", projDeleteClick);
     myProject.appendChild(projDeleteBtn);
     

@@ -78,14 +78,16 @@ export default function TaskCards(taskList) {
     const deleteBtn = document.createElement('button');
     deleteBtn.id = "task-delete-btn";
     deleteBtn.type = "button";
-    deleteBtn.textContent = 'Delete';
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.textContent = '';
     deleteBtn.dataset.taskID = task.id;
     deleteBtn.addEventListener("click", deleteTaskHandler);
 
     // Create Edit Button
     const editBtn = document.createElement('button');
     editBtn.id = "task-edit-btn";
-    editBtn.textContent = "edit";
+    editBtn.classList.add("edit-btn");
+    editBtn.textContent = "";
     editBtn.addEventListener("click", editTaskHandler);
 
     taskInfoList.appendChild(titleItem);
