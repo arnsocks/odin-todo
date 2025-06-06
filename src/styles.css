@@ -253,5 +253,28 @@ dialog::backdrop {
 dialog button {
   background-color: var(--dark);
   color: var(--light);
+  padding: 5px 1rem;
+}
+
+dialog form {
+  margin: auto;
+  width: 95%;
+}
+
+dialog input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  width: 100%;
+  display: block;
+  margin: auto;
+  margin-bottom: 1rem;
+  padding: 5px 0;
+  resize: vertical;
+}
+
+dialog .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 /* DEV - DEBUGGING */

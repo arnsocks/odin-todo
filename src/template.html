@@ -72,10 +72,12 @@
             <option value="">--Please select a project--</option>
           </select>
         </li>
+        <li class="buttons">
+          <button id="task-confirm">Submit</button>
+          <button id="task-cancel" formmethod="dialog" value="cancel">Cancel</button>
+        </li>
       </ul>
-      <!-- <button id="task-confirm" type="button" value="default">Confirm</button> -->
-      <button id="task-confirm">submit</button>
-      <button id="task-cancel" formmethod="dialog" value="cancel">Cancel</button>
+      
     </form>
   </dialog>
   
@@ -93,9 +95,12 @@
 
           </textarea>
         </li>
+        <li class="buttons">
+          <button id="project-confirm" type="submit" value="default">Submit</button>
+          <button id="project-cancel" type="button" value="cancel">Cancel</button>
+        </li>
       </ul>
-      <button id="project-confirm" type="submit" value="default">Confirm</button>
-      <button id="project-cancel" type="button" value="cancel">Cancel</button>
+      
     </form>
 
   </dialog>

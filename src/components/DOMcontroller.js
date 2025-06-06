@@ -234,6 +234,12 @@ function sortTaskClick(e) {
 }
 
 function toggleCompleteClick() {
+  if (showComplete) {
+    showCompleteBtn.textContent = "Show Completed Tasks";
+  } else {
+    showCompleteBtn.textContent = "Hide Completed Tasks";
+  }
+  
   showComplete = !showComplete;
   renderTasks();
 }
