@@ -40,7 +40,6 @@ export function renderTasks() {
 
   if (currentSortMethod) {
     myTaskList = App.sortTasks(myTaskList, currentSortMethod);
-    console.table(myTaskList);
   }
   loadComponent(CardLayout(myTaskList)); 
   
@@ -108,7 +107,6 @@ export function renderProjectBar() {
     projDeleteBtn.classList.add("delete-btn");
     projDeleteBtn.addEventListener("click", projDeleteClick);
     myProject.appendChild(projDeleteBtn);
-    
     projectList.appendChild(myProject);
 
     // This bit updates the list of projects in the select dropdown and should
@@ -140,29 +138,19 @@ function taskCancelClick() {
 }
 
 function confirmNewTask(e) {
-  // e.preventDefault();
-  
   if (!testInputValidity(taskTitle.value, priority.value)) return;
-
-  console.log (`Creating a task with title ${taskTitle.value} desc: ${taskDescription.value}, priority: ${priority.value} and project: ${project.value}`);
   App.createTask(taskTitle.value, taskDescription.value, dueDate.value, priority.value, project.value);
   newTaskDialog.close();
   clearTaskInputs();
   renderTasks();
-
   confirmTaskBtn.removeEventListener("click", confirmNewTask);
 }
 
 function confirmProjectClick() {
-
-  
-
   const projectTitle = document.querySelector("#project-title");
   const projectDescription = document.querySelector("#project-description");
   if (!testInputValidity(projectTitle.value)) return;
-
   App.createProject(projectTitle.value, projectDescription.value);
-  
   newProjectDialog.close();
   renderProjectBar();
   projectTitle.value = '';
@@ -189,10 +177,8 @@ export function editTaskHandler(e) {
   dueDate.valueAsDate = new Date(myTask.dueDate);
   priority.value = myTask.priority;
   project.value = myTask.project;
-
   confirmTaskBtn.dataset.taskID = `${myTask.id}`;
   confirmTaskBtn.addEventListener("click", confirmEditTask);
-
   newTaskDialog.showModal();
 }
 
@@ -205,8 +191,6 @@ function clearTaskInputs() {
 }
 
 function confirmEditTask(e) {
-  // e.preventDefault();
-
   if (!testInputValidity(taskTitle.value, priority.value)) return;
 
   newTaskDialog.close();
@@ -222,10 +206,8 @@ function confirmEditTask(e) {
 function filterProjectClick(e) {
   if (e.target.parentNode.dataset.projectID) {
     currentDisplayProject = e.target.parentNode.dataset.projectID;
-
   } else currentDisplayProject = null;
   renderTasks();
-
 }
 
 function sortTaskClick(e) {
@@ -239,7 +221,6 @@ function toggleCompleteClick() {
   } else {
     showCompleteBtn.textContent = "Hide Completed Tasks";
   }
-  
   showComplete = !showComplete;
   renderTasks();
 }
@@ -255,7 +236,6 @@ export function deleteTaskHandler(e) {
 export function toggleTaskHandler(e) {
   const myTaskID = e.target.parentNode.parentNode.parentNode.dataset.taskID;
   App.changeTaskStatus(myTaskID, e.target.checked);
-
 }
 
 function testInputValidity(...args) {

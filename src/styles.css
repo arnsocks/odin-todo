@@ -94,7 +94,6 @@ button:hover {
   color: white;
   font-size: 3rem;
   text-decoration: underline;
-  /* text-underline-offset: -5px; */
 }
 
 #tagline {
@@ -239,7 +238,6 @@ button:hover {
 
 dialog{
   width: 400px;
-  /* min-height: 300px; */
   margin: auto;
   border: none;
   color: var(--text);
@@ -277,4 +275,3 @@ dialog .buttons {
   justify-content: center;
   gap: 1rem;
 }
-/* DEV - DEBUGGING */

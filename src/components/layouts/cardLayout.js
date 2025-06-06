@@ -105,8 +105,6 @@ export default function TaskCards(taskList) {
   return cardContainer;
 }
 
-
-
 const titleHeading = document.createElement('span');
 titleHeading.classList.add('task-info-heading');
 titleHeading.textContent = ''
